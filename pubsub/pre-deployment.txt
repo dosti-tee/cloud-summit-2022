@@ -1,0 +1,31 @@
+Cloud Summit
+
+gcloud iam service-accounts create custom-metrics-sd-adapter --project tac-cloud-summit-demo
+
+gcloud projects add-iam-policy-binding tac-cloud-summit-demo \
+  --role "roles/monitoring.editor" \
+  --member "serviceAccount:custom-metrics-sd-adapter@tac-cloud-summit-demo.iam.gserviceaccount.com"
+
+gcloud iam service-accounts add-iam-policy-binding \
+  --role roles/iam.workloadIdentityUser \
+  --member "serviceAccount:tac-cloud-summit-demo.svc.id.goog[custom-metrics/custom-metrics-stackdriver-adapter]" \
+  custom-metrics-sd-adapter@tac-cloud-summit-demo.iam.gserviceaccount.com --project tac-cloud-summit-demo
+
+
+kubectl get --raw '/apis/external.metrics.k8s.io/v1beta1/namespaces/pubsub/pubsub.googleapis.com|subscription|num_undelivered_messages' | jq -C
+
+------
+
+gcloud iam service-accounts create pubsub-sa --project tac-cloud-summit-demo
+
+gcloud projects add-iam-policy-binding tac-cloud-summit-demo \
+  --role roles/pubsub.editor \
+  --member "serviceAccount:pubsub-sa@tac-cloud-summit-demo.iam.gserviceaccount.com"
+
+gcloud iam service-accounts add-iam-policy-binding \
+  --role roles/iam.workloadIdentityUser \
+  --member "serviceAccount:tac-cloud-summit-demo.svc.id.goog[pubsub/pubsub-ksa]" \
+  pubsub-sa@tac-cloud-summit-demo.iam.gserviceaccount.com --project tac-cloud-summit-demo
+
+
+for i in {1..20}; do gcloud pubsub topics publish echo --project tac-cloud-summit-demo --message="Autoscaling demo #${i}"; done

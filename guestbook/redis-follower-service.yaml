@@ -1,0 +1,18 @@
+# [START gke_guestbook_redis_follower_service_service_redis_follower]
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis-follower
+  labels:
+    app: redis
+    role: follower
+    tier: backend
+spec:
+  ports:
+    # the port that this service should serve on
+  - port: 6379
+  selector:
+    app: redis
+    role: follower
+    tier: backend
+# [END gke_guestbook_redis_follower_service_service_redis_follower]

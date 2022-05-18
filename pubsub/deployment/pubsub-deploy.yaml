@@ -1,0 +1,20 @@
+# [START gke_deployment_pubsub_deployment_pubsub]
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pubsub
+  namespace: pubsub
+spec:
+  selector:
+    matchLabels:
+      app: pubsub
+  template:
+    metadata:
+      labels:
+        app: pubsub
+    spec:
+      serviceAccountName: pubsub-ksa
+      containers:
+      - name: subscriber
+        image: us-docker.pkg.dev/google-samples/containers/gke/pubsub-sample:v1
+# [END gke_deployment_pubsub_deployment_pubsub]
