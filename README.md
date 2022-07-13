@@ -41,7 +41,10 @@ gcloud iam service-accounts add-iam-policy-binding \
   --member "serviceAccount:<<PROJECT_ID>>.svc.id.goog[pubsub/pubsub-ksa]" \
   pubsub-sa@<<PROJECT_ID>>.iam.gserviceaccount.com --project <<PROJECT_ID>>
 ```
-5. Use kubectl to verify that your deployment, hpa and other components are working.
+5. Change directory into the [pubsub/deployment](pubsub/deployment) folder. Execute the below command and use kubectl to verify that your deployment, hpa and other components are working.
+```
+kubectl apply -f .
+```
 6. Generate some messages on the pubsub run
 ```
 for i in {1..100}; do gcloud pubsub topics publish echo --project <<PROJECT_ID>> -—message=“Autoscaling demo #${i}”; done
