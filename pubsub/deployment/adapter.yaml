@@ -9,7 +9,7 @@ metadata:
   name: custom-metrics-stackdriver-adapter
   namespace: custom-metrics
   annotations:
-    iam.gke.io/gcp-service-account: custom-metrics-sd-adapter@tac-dev-prj-4ks1.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: custom-metrics-sd-adapter@<<PROJECT_ID>>.iam.gserviceaccount.com
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding

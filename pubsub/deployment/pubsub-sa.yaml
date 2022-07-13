@@ -9,4 +9,4 @@ metadata:
   name: pubsub-ksa
   namespace: pubsub
   annotations:
-    iam.gke.io/gcp-service-account: serviceAccount:pubsub-sa@tac-dev-prj-4ks1.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: serviceAccount:pubsub-sa@<<PROJECT_ID>>.iam.gserviceaccount.com
